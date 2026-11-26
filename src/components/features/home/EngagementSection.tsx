@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useAppShell } from "@/context/useAppShell";
-import { ENGAGEMENT_MODELS, PROCESS_STEPS } from "@/data/agencyData";
+import { ENGAGEMENT_MODELS, PROCESS_STEPS } from "@/data/services";
 
 export function EngagementSection() {
   const { openInquiryModal } = useAppShell();
@@ -18,8 +18,8 @@ export function EngagementSection() {
         <div id="engagement" className="scroll-mt-20 text-left">
           <SectionHeading
             badge="Engagement & Hiring Models"
-            title="Flexible ways to collaborate or hire dedicated engineers"
-            description="Whether you need a complete product squad, a predictable MVP build, or individual senior specialists embedded in your sprints."
+            title="Flexible ways to build or expand your engineering team"
+            description="Choose a full cross-functional squad, a fixed-scope MVP release, or vetted senior specialists integrated directly into your workflow."
           />
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -99,7 +99,7 @@ export function EngagementSection() {
         <div id="process" className="scroll-mt-20 text-left">
           <SectionHeading
             badge="Delivery Process"
-            title="From raw idea to production scale in four structured stages"
+            title="From initial concept to production scale in four clear phases"
           />
 
           <div className="relative mt-8 sm:mt-10">

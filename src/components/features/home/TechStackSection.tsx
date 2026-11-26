@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/shared/MotionPrimitives";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TECH_CATEGORIES } from "@/data/agencyData";
+import { TECH_CATEGORIES } from "@/data/services";
 import { EASE_CURVE } from "@/lib/motion";
 
 export function TechStackSection() {
@@ -18,8 +18,8 @@ export function TechStackSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Engineering Stack"
-          title="Modern, battle-tested technologies across the stack"
-          description="We select proven tools that keep your hiring pool wide, bundles fast, and cloud infrastructure predictable."
+          title="Proven, modern technologies across every layer"
+          description="We choose reliable, widely supported tools that keep performance high, onboarding simple, and infrastructure costs predictable."
         />
 
         <Tabs

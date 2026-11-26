@@ -17,14 +17,14 @@ export function InquiryDialog() {
       <DialogContent className="max-w-xl">
         <DialogHeader>
           <Badge variant="secondary" className="w-fit rounded-full px-3 py-1">
-            24h Architecture &amp; Estimate Response
+            24-Hour Proposal &amp; Estimate
           </Badge>
-          <DialogTitle className="text-2xl pt-1">
-            Start a Project with Veloce Digital
+          <DialogTitle className="pt-1 text-2xl">
+            Start Your Project
           </DialogTitle>
           <DialogDescription>
-            Share your goals and preferred timeline. We will respond with an
-            engineering roadmap, squad recommendation, and ballpark estimate.
+            Share your goals and target timeline. We will follow up with a clear
+            roadmap, team recommendation, and project estimate.
           </DialogDescription>
         </DialogHeader>
 

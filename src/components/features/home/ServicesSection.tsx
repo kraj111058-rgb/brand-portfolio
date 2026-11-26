@@ -14,7 +14,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAppShell } from "@/context/useAppShell";
-import { SERVICES, type ServiceItem } from "@/data/agencyData";
+import { SERVICES, type ServiceItem } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 const ACCENT_MAP: Record<
@@ -87,8 +87,8 @@ export function ServicesSection() {
         <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
           <SectionHeading
             badge="Capabilities & Services"
-            title="End-to-end engineering built around business outcomes"
-            description="Everything modern product teams need under one roof—clean modular UI, resilient cloud architecture, and rapid AI integration."
+            title="End-to-end engineering focused on measurable outcomes"
+            description="Everything modern product teams need under one roof—intuitive interfaces, resilient cloud systems, and practical AI integration."
           />
 
           <Button
@@ -211,7 +211,7 @@ export function ServicesSection() {
                         onClick={() => openInquiryModal(service.inquiryTopic)}
                         className="group/btn h-8 px-2.5 text-xs font-bold text-indigo-600 hover:bg-indigo-500/10 hover:text-indigo-700 dark:text-indigo-400 cursor-pointer"
                       >
-                        <span>Discuss scope</span>
+                        <span>Discuss Scope</span>
                         <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                       </Button>
                     </div>

@@ -15,7 +15,7 @@ import {
 import {
   INQUIRY_BUDGET_OPTIONS,
   INQUIRY_SERVICE_OPTIONS,
-} from "@/data/agencyData";
+} from "@/data/testimonials";
 
 interface InquiryFormProps {
   defaultService?: string;
@@ -55,14 +55,14 @@ export function InquiryForm({
   const handleFormSubmit = () => {
     const nextErrors: FormErrors = {};
     if (!name.trim()) {
-      nextErrors.name = "Please enter your name.";
+      nextErrors.name = "Please enter your full name.";
     }
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      nextErrors.email = "Please enter a valid work email.";
+      nextErrors.email = "Please enter a valid work email address.";
     }
     if (brief.trim().length < 12) {
       nextErrors.brief =
-        "Share at least a short sentence about your product or timeline.";
+        "Please share a brief overview of your project or timeline.";
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -82,13 +82,14 @@ export function InquiryForm({
         </div>
         <div className="space-y-1.5">
           <h4 className="text-lg font-bold text-foreground">
-            Discovery request received
+            Inquiry Received
           </h4>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Thanks, <span className="font-semibold text-foreground">{name}</span>
-            . Our solution architect will review your{" "}
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Thank you,{" "}
+            <span className="font-semibold text-foreground">{name}</span>. A
+            solution architect will review your{" "}
             <span className="font-semibold text-foreground">{service}</span>{" "}
-            scope and respond to{" "}
+            inquiry and respond to{" "}
             <span className="font-semibold text-foreground">{email}</span>{" "}
             within 24 business hours.
           </p>
@@ -104,7 +105,7 @@ export function InquiryForm({
               onSuccessDone?.();
             }}
           >
-            {onSuccessDone ? "Close" : "Send Another Brief"}
+            {onSuccessDone ? "Close" : "Send Another Inquiry"}
           </Button>
         </div>
       </div>
@@ -130,7 +131,7 @@ export function InquiryForm({
                   setName(e.target.value);
                   clearError("name");
                 }}
-                placeholder="Raj Sharma"
+                placeholder="Alex Morgan"
               />
             }
           />
@@ -161,14 +162,14 @@ export function InquiryForm({
       {!compact && (
         <Field.Root name="company" className="flex flex-col gap-1.5">
           <Field.Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Company / Brand Name
+            Company Name
           </Field.Label>
           <Field.Control
             render={
               <Input
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                placeholder="Acme Labs (Optional)"
+                placeholder="Acme Inc. (Optional)"
               />
             }
           />
@@ -178,7 +179,7 @@ export function InquiryForm({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field.Root name="service" className="flex flex-col gap-1.5">
           <Field.Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            What are you building?
+            Project Type
           </Field.Label>
           <Select
             value={service}
@@ -187,7 +188,7 @@ export function InquiryForm({
             }}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select service" />
+              <SelectValue placeholder="Select a service" />
             </SelectTrigger>
             <SelectContent>
               {INQUIRY_SERVICE_OPTIONS.map((option) => (
@@ -210,7 +211,7 @@ export function InquiryForm({
             }}
           >
             <SelectTrigger>
-              <SelectValue placeholder="Select budget" />
+              <SelectValue placeholder="Select a budget range" />
             </SelectTrigger>
             <SelectContent>
               {INQUIRY_BUDGET_OPTIONS.map((option) => (
@@ -225,7 +226,7 @@ export function InquiryForm({
 
       <Field.Root name="brief" className="flex flex-col gap-1.5">
         <Field.Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Project Scope &amp; Timeline *
+          Project Details &amp; Timeline *
         </Field.Label>
         <Field.Control
           render={
@@ -236,7 +237,7 @@ export function InquiryForm({
                 clearError("brief");
               }}
               className={compact ? "min-h-24" : "min-h-28"}
-              placeholder="Tell us about your target launch window, key features, or team needs..."
+              placeholder="Share your target launch date, key goals, or team requirements..."
             />
           }
         />
@@ -245,8 +246,8 @@ export function InquiryForm({
 
       <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between">
         <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-          <ShieldCheck className="size-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
-          <span>Protected by mutual NDA on request</span>
+          <ShieldCheck className="size-4 shrink-0 text-indigo-600 dark:text-indigo-400" />
+          <span>Protected by a mutual NDA upon request</span>
         </div>
 
         <Button
@@ -254,7 +255,7 @@ export function InquiryForm({
           size="lg"
           className="h-11 rounded-xl bg-indigo-600 px-6 font-semibold text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 cursor-pointer"
         >
-          <span>Request Technical Proposal</span>
+          <span>Request a Proposal</span>
           <ArrowRight className="size-4" />
         </Button>
       </div>

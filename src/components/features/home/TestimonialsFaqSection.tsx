@@ -11,7 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAppShell } from "@/context/useAppShell";
-import { FAQS, TESTIMONIALS } from "@/data/agencyData";
+import { FAQS, TESTIMONIALS } from "@/data/testimonials";
 
 export function TestimonialsFaqSection() {
   const { openInquiryModal } = useAppShell();
@@ -25,7 +25,7 @@ export function TestimonialsFaqSection() {
         <div className="text-left">
           <SectionHeading
             badge="Client Voices"
-            title="Partners who trust us with mission-critical launches"
+            title="Trusted by product leaders for mission-critical launches"
           />
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -78,8 +78,8 @@ export function TestimonialsFaqSection() {
           <div className="min-w-0 space-y-4 text-left lg:col-span-5">
             <SectionHeading
               badge="FAQ"
-              title="Common questions before kickoff"
-              description="Transparent answers on intellectual property, onboarding speed, timezones, and post-launch support."
+              title="Frequently asked questions"
+              description="Clear answers on intellectual property, onboarding speed, time zones, and ongoing support."
             />
             <Reveal delay={0.1} className="pt-1">
               <Button

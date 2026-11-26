@@ -40,6 +40,7 @@ interface SpotlightCardProps {
   className?: string;
   spotlightColor?: string;
   onClick?: () => void;
+  cursorMode?: string;
 }
 
 export function SpotlightCard({
@@ -47,6 +48,7 @@ export function SpotlightCard({
   className,
   spotlightColor = "rgba(99, 102, 241, 0.14)",
   onClick,
+  cursorMode,
 }: SpotlightCardProps) {
   const mouseX = useMotionValue(-300);
   const mouseY = useMotionValue(-300);
@@ -66,6 +68,7 @@ export function SpotlightCard({
 
   return (
     <motion.div
+      data-cursor={cursorMode}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}

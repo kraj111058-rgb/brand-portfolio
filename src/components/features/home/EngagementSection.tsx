@@ -1,157 +1,256 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
+import { Compass, GitPullRequest, Layers, Rocket } from "lucide-react";
 
-import { Reveal, SpotlightCard } from "@/components/shared/MotionPrimitives";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useAppShell } from "@/context/useAppShell";
-import { ENGAGEMENT_MODELS, PROCESS_STEPS } from "@/data/services";
+import { PROCESS_STEPS } from "@/data/services";
+import { EASE_CURVE, VIEWPORT_CONFIG } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-export function EngagementSection() {
-  const { openInquiryModal } = useAppShell();
+/* ─── Phase Icon Map ────────────────────────────────────────── */
+function ProcessStepIcon({
+  step,
+  className,
+}: {
+  step: string;
+  className?: string;
+}) {
+  switch (step) {
+    case "01":
+      return <Compass className={className} />;
+    case "02":
+      return <Layers className={className} />;
+    case "03":
+      return <GitPullRequest className={className} />;
+    case "04":
+    default:
+      return <Rocket className={className} />;
+  }
+}
+
+/* ─── Restrained Electric Blue & Violet Accents ─────────────── */
+interface StepAccent {
+  labelText: string;
+  indicatorHover: string;
+}
+
+const STEP_ACCENTS: Record<string, StepAccent> = {
+  "01": {
+    labelText: "text-brand-blue dark:text-blue-400",
+    indicatorHover:
+      "group-hover:border-brand-blue/60 group-hover:text-brand-blue dark:group-hover:border-blue-400/60 dark:group-hover:text-blue-400",
+  },
+  "02": {
+    labelText: "text-brand-violet dark:text-violet-400",
+    indicatorHover:
+      "group-hover:border-brand-violet/60 group-hover:text-brand-violet dark:group-hover:border-violet-400/60 dark:group-hover:text-violet-400",
+  },
+  "03": {
+    labelText: "text-brand-blue dark:text-blue-400",
+    indicatorHover:
+      "group-hover:border-brand-blue/60 group-hover:text-brand-blue dark:group-hover:border-blue-400/60 dark:group-hover:text-blue-400",
+  },
+  "04": {
+    labelText: "text-brand-violet dark:text-violet-400",
+    indicatorHover:
+      "group-hover:border-brand-violet/60 group-hover:text-brand-violet dark:group-hover:border-violet-400/60 dark:group-hover:text-violet-400",
+  },
+};
+
+/* ─── Compact Vertical Editorial Timeline Row ───────────────── */
+function ProcessRow({
+  item,
+  idx,
+  totalSteps,
+  scrollYProgress,
+}: {
+  item: (typeof PROCESS_STEPS)[number];
+  idx: number;
+  totalSteps: number;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  const isFirst = idx === 0;
+  const isLast = idx === totalSteps - 1;
+  const segments = Math.max(1, totalSteps - 1);
+  const accent = STEP_ACCENTS[item.step] ?? STEP_ACCENTS["01"];
+
+  const prevSegmentStart = Math.max(0, (idx - 1) / segments);
+  const incomingStart = prevSegmentStart + 0.65 / segments;
+  const incomingEnd = idx / segments;
+  const incomingScaleY = useTransform(
+    scrollYProgress,
+    [incomingStart, incomingEnd],
+    [0, 1]
+  );
+
+  const outgoingStart = idx / segments;
+  const outgoingEnd = Math.min(1, outgoingStart + 0.65 / segments);
+  const outgoingScaleY = useTransform(
+    scrollYProgress,
+    [outgoingStart, outgoingEnd],
+    [0, 1]
+  );
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl space-y-16 px-4 sm:space-y-20 sm:px-6 lg:px-8">
-        <div id="engagement" className="scroll-mt-20 text-left">
-          <SectionHeading
-            badge="Engagement & Hiring Models"
-            title="Flexible ways to build or expand your engineering team"
-            description="Choose a full cross-functional squad, a fixed-scope MVP release, or vetted senior specialists integrated directly into your workflow."
-          />
-
-          <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {ENGAGEMENT_MODELS.map((model, idx) => {
-              const isFeatured = idx === 0;
-              return (
-                <Reveal key={model.id} delay={idx * 0.08} className="min-w-0">
-                  <SpotlightCard
-                    className={
-                      isFeatured
-                        ? "h-full border-2 border-indigo-600/60 p-5 shadow-xl shadow-indigo-600/8 sm:p-7"
-                        : "h-full p-5 sm:p-7"
-                    }
-                  >
-                    <div className="space-y-4">
-                      <Badge
-                        variant={isFeatured ? "default" : "secondary"}
-                        className={
-                          isFeatured
-                            ? "rounded-full bg-indigo-600 text-white"
-                            : "rounded-full"
-                        }
-                      >
-                        {model.badge}
-                      </Badge>
-
-                      <div>
-                        <h3 className="text-lg font-bold text-foreground transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400 sm:text-xl">
-                          {model.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          {model.description}
-                        </p>
-                      </div>
-
-                      <div className="rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-xs transition-colors group-hover:border-indigo-500/30">
-                        <span className="font-semibold text-muted-foreground">
-                          Best for:{" "}
-                        </span>
-                        <span className="font-semibold text-foreground">
-                          {model.bestFor}
-                        </span>
-                      </div>
-
-                      <ul className="space-y-2.5 pt-1 text-sm">
-                        {model.highlights.map((item) => (
-                          <li key={item} className="flex items-start gap-2">
-                            <Check className="mt-0.5 size-4 shrink-0 text-teal-600 transition-transform duration-200 group-hover:scale-110 dark:text-teal-400" />
-                            <span className="text-foreground/90">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mt-6 border-t border-border/60 pt-4 sm:mt-7">
-                      <Button
-                        type="button"
-                        variant={isFeatured ? "default" : "outline"}
-                        className={
-                          isFeatured
-                            ? "group/btn h-11 w-full rounded-xl bg-indigo-600 font-semibold text-white transition-all hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-600/20 cursor-pointer"
-                            : "group/btn h-11 w-full rounded-xl font-semibold transition-all hover:border-indigo-600 hover:bg-indigo-600 hover:text-white cursor-pointer"
-                        }
-                        onClick={() => openInquiryModal(model.inquiryTopic)}
-                      >
-                        <span>{model.ctaLabel}</span>
-                        <ArrowUpRight className="size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                      </Button>
-                    </div>
-                  </SpotlightCard>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-
-        <div id="process" className="scroll-mt-20 text-left">
-          <SectionHeading
-            badge="Delivery Process"
-            title="From initial concept to production scale in four clear phases"
-          />
-
-          <div className="relative mt-8 sm:mt-10">
+    <motion.article
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_CONFIG}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.4,
+        delay: prefersReducedMotion ? 0 : idx * 0.05,
+        ease: EASE_CURVE,
+      }}
+      className={cn(
+        "group grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-3.5 px-2 sm:grid-cols-[2.5rem_minmax(0,1fr)] sm:gap-x-4 sm:px-3",
+        "md:grid-cols-[2.5rem_7.75rem_minmax(0,1fr)_11.25rem] md:gap-x-3.5",
+        "lg:grid-cols-[2.5rem_8.75rem_minmax(0,1fr)_14.5rem] lg:gap-x-6 lg:px-4",
+        "xl:grid-cols-[2.5rem_9.5rem_minmax(0,1fr)_16.5rem] xl:gap-x-10",
+        "transition-colors duration-200 motion-reduce:transition-none",
+        "hover:bg-surface-subtle/80 dark:hover:bg-brand-navy-elevated/35"
+      )}
+    >
+      {/* ── Track 1: Continuous Vertical Connector Line + Circular Step Indicator ── */}
+      <div className="row-span-3 flex w-9 flex-col items-center sm:w-10 md:col-start-1 md:row-start-1 md:row-span-1">
+        {/* Incoming connector (hidden above step 01) */}
+        <div className="flex h-4 w-full justify-center lg:h-5">
+          {!isFirst && (
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute top-11 right-12 left-12 hidden h-[2px] bg-gradient-to-r from-indigo-500/25 via-blue-500/40 to-teal-500/25 lg:block"
-            />
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {PROCESS_STEPS.map((item, idx) => (
-                <Reveal key={item.step} delay={idx * 0.08} className="min-w-0">
-                  <motion.div
-                    whileHover={{ y: -4 }}
-                    transition={{ type: "spring", stiffness: 320, damping: 24 }}
-                    className="group relative flex h-full min-w-0 flex-col justify-between rounded-3xl border border-border/80 bg-card p-5 transition-colors duration-200 hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-950/6 dark:hover:shadow-black/35 sm:p-6"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex size-10 items-center justify-center rounded-xl bg-indigo-500/10 text-base font-extrabold tracking-tight text-indigo-600 transition-all duration-300 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white dark:bg-indigo-500/20 dark:text-indigo-400">
-                          {item.step}
-                        </span>
-                        <Badge
-                          variant="outline"
-                          className="rounded-full text-xs transition-colors group-hover:border-indigo-500/40"
-                        >
-                          {item.duration}
-                        </Badge>
-                      </div>
-                      <h3 className="text-base font-bold text-foreground transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400 sm:text-lg">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-
-                    <div className="mt-5">
-                      <Separator className="mb-3" />
-                      <p className="text-xs font-semibold text-foreground">
-                        Deliverable:{" "}
-                        <span className="font-normal text-muted-foreground">
-                          {item.artifact}
-                        </span>
-                      </p>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
+              className="relative -mt-px h-[calc(100%+1px)] w-[1.5px] overflow-hidden bg-border/80"
+            >
+              <motion.span
+                style={
+                  prefersReducedMotion
+                    ? undefined
+                    : { scaleY: incomingScaleY, originY: 0 }
+                }
+                className="block h-full w-full bg-brand-blue/70 dark:bg-blue-400/70"
+              />
             </div>
+          )}
+        </div>
+
+        {/* Single Circular Step Indicator (01–04) */}
+        <div
+          className={cn(
+            "relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-background font-mono text-xs font-bold tracking-tight text-foreground tabular-nums transition-colors duration-200 motion-reduce:transition-none sm:size-10 sm:text-[13px] dark:bg-brand-navy-elevated",
+            accent.indicatorHover
+          )}
+        >
+          {item.step}
+        </div>
+
+        {/* Outgoing connector (stops cleanly at step 04) */}
+        {!isLast && (
+          <div
+            aria-hidden="true"
+            className="relative flex w-[1.5px] flex-1 overflow-hidden bg-border/80"
+          >
+            <motion.span
+              style={
+                prefersReducedMotion
+                  ? undefined
+                  : { scaleY: outgoingScaleY, originY: 0 }
+              }
+              className="block h-full w-full bg-brand-blue/70 dark:bg-blue-400/70"
+            />
           </div>
+        )}
+      </div>
+
+      {/* ── Track 2: Icon + Phase Label (Left on Desktop/Tablet, Header Row on Mobile) ── */}
+      <div className="col-start-2 min-w-0 pt-4 md:row-start-1 md:py-4 lg:py-5">
+        <div className="flex h-9 items-center gap-2 sm:h-10">
+          <ProcessStepIcon
+            step={item.step}
+            className={cn("size-3.5 shrink-0", accent.labelText)}
+          />
+          <span
+            className={cn(
+              "font-mono text-[11px] font-semibold uppercase tracking-[0.14em]",
+              accent.labelText
+            )}
+          >
+            {item.duration}
+          </span>
         </div>
       </div>
+
+      {/* ── Track 3: Center Column (Heading + Description) ── */}
+      <div className="col-start-2 min-w-0 pt-1 md:col-start-3 md:row-start-1 md:py-4 lg:py-5">
+        <h3 className="text-base font-bold leading-snug tracking-[-0.02em] text-foreground transition-colors duration-200 group-hover:text-brand-blue motion-reduce:transition-none md:pt-1 sm:text-lg lg:text-[1.1875rem] dark:group-hover:text-blue-400">
+          {item.title}
+        </h3>
+        <p className="mt-1 max-w-[54ch] text-sm leading-relaxed text-muted-foreground">
+          {item.description}
+        </p>
+      </div>
+
+      {/* ── Track 4: Right Column (Compact Uppercase Label + Deliverable Text) ── */}
+      <div className="col-start-2 min-w-0 pt-2.5 pb-4 md:col-start-4 md:row-start-1 md:py-4 lg:py-5">
+        <div className="md:border-l md:border-border/75 md:pl-3.5 md:pt-0.5 lg:pl-4">
+          <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Deliverable
+          </span>
+          <p className="mt-0.5 text-sm font-semibold leading-snug text-foreground">
+            {item.artifact}
+          </p>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+/* ─── Section ───────────────────────────────────────────────── */
+export function EngagementSection() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 78%", "end 68%"],
+  });
+
+  return (
+    <section
+      id="process"
+      className="relative scroll-mt-20 overflow-x-clip border-t border-border/70 bg-background py-14 sm:py-18 lg:py-22"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:pl-14 md:pr-8 lg:pl-16 lg:pr-10 min-[1400px]:px-8">
+        <SectionHeading
+          badge="Delivery Process"
+          title="From initial concept to production scale in four clear phases"
+          description="A structured, transparent engineering workflow built to keep business scope, system architecture, and delivery execution aligned."
+          align="left"
+        />
+
+        {/* Four Compact Vertically Stacked Editorial Rows */}
+        <div
+          ref={timelineRef}
+          className="relative mt-9 divide-y divide-border/75 border-y border-border/75 sm:mt-11"
+        >
+          {PROCESS_STEPS.map((item, idx) => (
+            <ProcessRow
+              key={item.step}
+              item={item}
+              idx={idx}
+              totalSteps={PROCESS_STEPS.length}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/*
+        Engagement Models block intentionally disabled; #process remains anchored cleanly above.
+      */}
     </section>
   );
 }

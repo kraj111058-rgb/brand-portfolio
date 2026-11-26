@@ -14,7 +14,7 @@ export function InquiryDialog() {
 
   return (
     <Dialog open={inquiryOpen} onOpenChange={setInquiryOpen}>
-      <DialogContent className="max-w-xl">
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
           <Badge variant="secondary" className="w-fit rounded-full px-3 py-1">
             24-Hour Proposal &amp; Estimate

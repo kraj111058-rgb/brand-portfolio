@@ -45,6 +45,36 @@ export const TESTIMONIALS: Testimonial[] = [
     location: "Toronto, Canada",
     impact: "+165% Mobile Conversion",
   },
+  {
+    id: "t4",
+    quote:
+      "Their AI engineering squad delivered our customer operations copilot in ten weeks. Automated documentation triage now resolves 68% of routine API inquiries with full auditability.",
+    author: "Sophia Lindqvist",
+    role: "VP of Engineering",
+    company: "Kinetix Cloud",
+    location: "Stockholm, Sweden",
+    impact: "68% Tier-1 Deflection",
+  },
+  {
+    id: "t5",
+    quote:
+      "Replacing our legacy B2B portal moved wholesale reorders from fifteen minutes down to seconds. Real-time inventory sync scaled smoothly past $48M in annualized volume.",
+    author: "Daniel Okafor",
+    role: "Co-Founder & CTO",
+    company: "Aura Wholesale",
+    location: "Berlin, Germany",
+    impact: "3.1x Faster Reorders",
+  },
+  {
+    id: "t6",
+    quote:
+      "Batch overnight reports used to delay fraud checks for hours. Veloce Digital built a streaming detection workspace that scores transfers under 45ms and cut false reviews by 74%.",
+    author: "Hannah Park",
+    role: "Head of Risk & Product",
+    company: "FinLedger Corp",
+    location: "Singapore",
+    impact: "<45ms Risk Scoring",
+  },
 ];
 
 export const FAQS: FaqItem[] = [
@@ -78,6 +108,24 @@ export const FAQS: FaqItem[] = [
     question: "What kind of support do you provide after launch?",
     answer:
       "Every build includes a 30-day post-launch warranty covering bug fixes and performance optimization. Afterward, you can continue with a flexible support retainer or transition smoothly with complete documentation and handover.",
+  },
+  {
+    id: "faq-6",
+    question: "What software services and industries do you specialize in?",
+    answer:
+      "We engineer Web and SaaS platforms, native and cross-platform mobile apps, product UI/UX design systems, AI workflow automation, cloud modernization, and QA automation across FinTech, Healthcare, E-commerce, EdTech, Logistics, and B2B SaaS.",
+  },
+  {
+    id: "faq-7",
+    question: "How are project pricing and delivery timelines structured?",
+    answer:
+      "We work through fixed-scope product engagements or monthly dedicated engineering squads depending on your roadmap maturity. After technical discovery, we share a clear milestone plan, recommended team composition, and estimated sprint schedule tailored to your scope.",
+  },
+  {
+    id: "faq-8",
+    question: "Can your engineers work alongside our internal development team?",
+    answer:
+      "Yes. Whether you need a complete cross-functional squad or vetted frontend, backend, mobile, AI, or QA specialists, our engineers integrate directly into your existing Slack channels, Jira or Linear boards, and GitHub workflows.",
   },
 ];
 

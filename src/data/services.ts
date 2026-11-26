@@ -134,115 +134,191 @@ export const SERVICES: ServiceItem[] = [
 export const TECH_CATEGORIES: TechCategory[] = [
   {
     id: "frontend",
-    label: "Frontend & UI",
+    label: "Frontend",
     description:
-      "Accessible, responsive interfaces engineered with modern component architecture.",
+      "Accessible, responsive user interfaces engineered with strict type safety and reusable component systems.",
     items: [
       {
         name: "React",
         role: "UI Architecture",
-        note: "Modular component architecture for fast, responsive interfaces",
+        note: "Modular component architecture for responsive web applications.",
       },
       {
         name: "TypeScript",
         role: "Type Safety",
-        note: "End-to-end type safety across frontend and backend code",
+        note: "End-to-end static typing across frontend interfaces and API contracts.",
       },
       {
         name: "Next.js",
         role: "Full-Stack Web",
-        note: "Server-side rendering, edge caching, and SEO-ready web apps",
+        note: "Server-side rendering, edge caching, and SEO-ready storefronts.",
       },
       {
-        name: "Design Systems",
-        role: "UI Engineering",
-        note: "Accessible component libraries tailored to your brand",
+        name: "Tailwind CSS",
+        role: "Design Styling",
+        note: "Token-driven utility styling built for speed and visual consistency.",
       },
       {
         name: "Vite",
         role: "Build Tooling",
-        note: "Rapid local development and optimized production bundles",
+        note: "Rapid local development and lean, optimized production bundles.",
       },
       {
-        name: "GraphQL & tRPC",
-        role: "Data Layer",
-        note: "Predictable client caching and strict schema validation",
-      },
-    ],
-  },
-  {
-    id: "mobile",
-    label: "Mobile Engineering",
-    description:
-      "Native performance and rapid cross-platform delivery for iOS and Android.",
-    items: [
-      {
-        name: "Flutter",
-        role: "Cross-Platform",
-        note: "Smooth 60–120fps cross-platform UI from a single codebase",
-      },
-      {
-        name: "React Native",
-        role: "Cross-Platform JS",
-        note: "Shared TypeScript business logic across web and mobile",
-      },
-      {
-        name: "Swift & SwiftUI",
-        role: "Native iOS",
-        note: "Native iOS capabilities including Apple Pay and HealthKit",
-      },
-      {
-        name: "Kotlin & Compose",
-        role: "Native Android",
-        note: "Native Android performance, background sync, and hardware access",
-      },
-      {
-        name: "SQLite & Realm",
-        role: "Offline Storage",
-        note: "Reliable offline-first persistence for field and travel apps",
-      },
-      {
-        name: "Fastlane & Bitrise",
-        role: "Release Automation",
-        note: "Automated App Store and Play Console deployment pipelines",
+        name: "Figma",
+        role: "Design Systems",
+        note: "Interactive prototypes and tokenized component handoff workflows.",
       },
     ],
   },
   {
     id: "backend",
-    label: "Backend & Cloud",
+    label: "Backend",
     description:
-      "Resilient APIs, event streams, and high-availability cloud infrastructure.",
+      "Resilient APIs, event-driven pipelines, and modular domain services built for high concurrency.",
     items: [
       {
-        name: "Node.js & NestJS",
+        name: "Node.js",
         role: "API Services",
-        note: "High-concurrency APIs, microservices, and real-time events",
+        note: "High-concurrency APIs, microservices, and real-time webhook engines.",
       },
       {
-        name: "Python & FastAPI",
-        role: "Data & APIs",
-        note: "Asynchronous services, data integrations, and ML APIs",
+        name: "Python",
+        role: "Data & ML APIs",
+        note: "Asynchronous backend services, data integrations, and AI endpoints.",
       },
       {
-        name: "Laravel & Go",
-        role: "Core Systems",
-        note: "Rapid backend delivery and low-latency background workers",
+        name: "Go",
+        role: "Core Workers",
+        note: "Low-latency services and lightweight background processing workers.",
       },
       {
-        name: "PostgreSQL & Redis",
-        role: "Data Storage",
-        note: "Reliable relational storage, indexing, and distributed caching",
+        name: "Laravel",
+        role: "Web Systems",
+        note: "Structured MVC platforms for rapid enterprise portal delivery.",
       },
       {
-        name: "AWS & GCP",
-        role: "Cloud Infrastructure",
-        note: "Multi-region high-availability hosting and serverless compute",
+        name: "GraphQL",
+        role: "Schema APIs",
+        note: "Predictable client caching and strongly typed schema validation.",
       },
       {
-        name: "Docker & Terraform",
-        role: "DevOps & IaC",
-        note: "Reproducible cloud environments and automated rollbacks",
+        name: "Kafka",
+        role: "Event Streaming",
+        note: "Real-time telemetry ingestion and fault-tolerant async messaging.",
+      },
+    ],
+  },
+  {
+    id: "mobile",
+    label: "Mobile",
+    description:
+      "Native performance and fluid cross-platform engineering for iOS and Android devices.",
+    items: [
+      {
+        name: "Flutter",
+        role: "Cross-Platform",
+        note: "Smooth 60–120fps native-compiled UI from a unified codebase.",
+      },
+      {
+        name: "React Native",
+        role: "Cross-Platform JS",
+        note: "Shared TypeScript business logic across mobile and web products.",
+      },
+      {
+        name: "Swift",
+        role: "Native iOS",
+        note: "Native iOS interfaces with biometric auth and platform integrations.",
+      },
+      {
+        name: "Kotlin",
+        role: "Native Android",
+        note: "Modern Android UI, background sync, and hardware capabilities.",
+      },
+      {
+        name: "Fastlane",
+        role: "Release Ops",
+        note: "Automated signing, test verification, and store submission pipelines.",
+      },
+      {
+        name: "Bitrise",
+        role: "Mobile CI/CD",
+        note: "Continuous mobile build testing and distribution workflows.",
+      },
+    ],
+  },
+  {
+    id: "database",
+    label: "Database",
+    description:
+      "Reliable transactional persistence, distributed caching, semantic vector indexing, and analytics.",
+    items: [
+      {
+        name: "PostgreSQL",
+        role: "Relational Data",
+        note: "ACID-compliant transactional storage and structured relational schemas.",
+      },
+      {
+        name: "Redis",
+        role: "Distributed Cache",
+        note: "Sub-millisecond session storage, rate limiting, and query caching.",
+      },
+      {
+        name: "pgvector",
+        role: "Vector Embeddings",
+        note: "Hybrid relational and semantic similarity search inside Postgres.",
+      },
+      {
+        name: "Pinecone",
+        role: "Vector Indexing",
+        note: "Low-latency high-dimensional retrieval for knowledge bases.",
+      },
+      {
+        name: "ClickHouse",
+        role: "Telemetry Analytics",
+        note: "High-speed columnar storage for real-time product analytics.",
+      },
+      {
+        name: "SQLite",
+        role: "Offline Storage",
+        note: "Reliable local-first storage for mobile and edge environments.",
+      },
+    ],
+  },
+  {
+    id: "cloud",
+    label: "Cloud & DevOps",
+    description:
+      "Multi-region cloud infrastructure, reproducible containers, automated QA, and live observability.",
+    items: [
+      {
+        name: "AWS",
+        role: "Cloud Platform",
+        note: "Multi-region hosting, managed databases, and serverless compute.",
+      },
+      {
+        name: "GCP",
+        role: "Cloud Compute",
+        note: "Scalable container hosting, cloud networking, and managed AI services.",
+      },
+      {
+        name: "Docker",
+        role: "Containers",
+        note: "Reproducible application environments across development and release.",
+      },
+      {
+        name: "Kubernetes",
+        role: "Orchestration",
+        note: "Automated scaling, self-healing workloads, and zero-downtime rollouts.",
+      },
+      {
+        name: "Terraform",
+        role: "Infra as Code",
+        note: "Version-controlled cloud provisioning and repeatable deployments.",
+      },
+      {
+        name: "Sentry",
+        role: "Observability",
+        note: "Live performance tracing and production error monitoring.",
       },
     ],
   },
@@ -250,37 +326,37 @@ export const TECH_CATEGORIES: TechCategory[] = [
     id: "ai",
     label: "AI & Automation",
     description:
-      "Grounded generative AI, semantic retrieval, and automated business workflows.",
+      "Practical generative AI copilots, semantic retrieval pipelines, and auditable workflow automation.",
     items: [
       {
-        name: "Gemini & OpenAI",
+        name: "Gemini API",
         role: "Foundation Models",
-        note: "Structured tool calling, multimodal inputs, and streaming UX",
+        note: "Multimodal reasoning, structured tool calling, and streaming responses.",
+      },
+      {
+        name: "OpenAI",
+        role: "Language Models",
+        note: "Production text synthesis, function calling, and assistant workflows.",
       },
       {
         name: "LangGraph",
         role: "Agent Workflows",
-        note: "Stateful multi-step AI workflows with human approval gates",
+        note: "Stateful multi-step agent orchestration with human approval gates.",
       },
       {
-        name: "pgvector & Pinecone",
-        role: "Vector Search",
-        note: "Hybrid semantic and metadata retrieval pipelines",
+        name: "pgvector",
+        role: "Retrieval Storage",
+        note: "Grounded semantic and metadata search inside PostgreSQL.",
       },
       {
-        name: "Eval & Guardrails",
-        role: "Reliability",
-        note: "Automated accuracy testing, PII redaction, and tracing",
+        name: "Pinecone",
+        role: "Semantic Index",
+        note: "Vector indexing pipelines for instant knowledge retrieval.",
       },
       {
-        name: "n8n & Webhooks",
+        name: "n8n",
         role: "Workflow Ops",
-        note: "Automated CRM, billing, and ERP workflow orchestration",
-      },
-      {
-        name: "ClickHouse",
-        role: "Analytics",
-        note: "Real-time product telemetry and AI usage analytics",
+        note: "Automated CRM, billing, and internal operational integrations.",
       },
     ],
   },
@@ -338,33 +414,33 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     step: "01",
     title: "Discovery & Technical Scope",
-    duration: "Week 1",
+    duration: "Strategy",
     description:
-      "We align on business objectives, user journeys, technical risks, and core requirements before writing a single line of code.",
-    artifact: "Product Spec & Delivery Roadmap",
+      "Understand business requirements, define project scope, identify challenges, and establish a technical roadmap.",
+    artifact: "Product Spec & Technical Roadmap",
   },
   {
     step: "02",
     title: "UX Design & Architecture",
-    duration: "Weeks 2–3",
+    duration: "Blueprint",
     description:
-      "We craft interactive Figma prototypes alongside database schemas, API contracts, and cloud security architecture.",
-    artifact: "Design System & Cloud Blueprint",
+      "Create user-focused experiences, design system foundations, and scalable technical architecture.",
+    artifact: "Design System & Architecture Plan",
   },
   {
     step: "03",
     title: "Agile Engineering Sprints",
-    duration: "2-Week Cycles",
+    duration: "Execution",
     description:
-      "Clean, well-tested pull requests backed by automated test coverage and live staging demos at the end of every sprint.",
-    artifact: "Production-Ready Staging Releases",
+      "Build through structured development cycles, code reviews, continuous testing, and regular progress updates.",
+    artifact: "Reviewed Builds & Staging Updates",
   },
   {
     step: "04",
     title: "Launch, Monitoring & Scale",
-    duration: "Ongoing",
+    duration: "Evolution",
     description:
-      "Zero-downtime releases, performance tuning, real-time monitoring, and continuous improvements driven by user data.",
-    artifact: "SLA Support & Growth Roadmap",
+      "Deploy the product, monitor performance, resolve issues, and support future improvements.",
+    artifact: "Production Release & Ongoing Support",
   },
 ];

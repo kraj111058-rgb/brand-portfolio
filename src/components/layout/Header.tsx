@@ -1,9 +1,10 @@
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Moon, Sparkles, Sun } from "lucide-react";
+import { ArrowUpRight, Moon, Sun } from "lucide-react";
 
 import { HeaderSubmenu } from "@/components/layout/HeaderSubmenu";
 import { MobileNavDrawer } from "@/components/layout/MobileNavDrawer";
 import { BrandLogo } from "@/components/shared/BrandLogo";
+import { MagneticWrap } from "@/components/shared/MotionPrimitives";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -30,21 +31,25 @@ const Header = () => {
   });
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 w-full border-b border-border/75 bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/75">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <BrandLogo showSubtitle />
 
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList>
+          <NavigationMenuList className="gap-0.5">
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-[13px] font-medium tracking-[-0.01em]">
+                Services
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <HeaderSubmenu group={SERVICES_MENU} />
               </NavigationMenuContent>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-[13px] font-medium tracking-[-0.01em]">
+                Solutions
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <HeaderSubmenu group={SOLUTIONS_MENU} />
               </NavigationMenuContent>
@@ -52,7 +57,10 @@ const Header = () => {
 
             {HEADER_ANCHOR_LINKS.map((link) => (
               <NavigationMenuItem key={link.href}>
-                <NavigationMenuLink href={link.href}>
+                <NavigationMenuLink
+                  href={link.href}
+                  className="text-[13px] font-medium tracking-[-0.01em]"
+                >
                   {link.label}
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -60,7 +68,7 @@ const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           <Button
             type="button"
             variant="ghost"
@@ -69,12 +77,12 @@ const Header = () => {
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
             onClick={toggleTheme}
-            className="rounded-xl transition-transform hover:scale-105 cursor-pointer"
+            className="size-9 rounded-xl border border-transparent text-muted-foreground transition-all hover:border-border/80 hover:bg-muted/80 hover:text-foreground cursor-pointer"
           >
             {theme === "dark" ? (
-              <Sun className="size-4 text-amber-400" />
+              <Sun className="size-4 text-amber-300" />
             ) : (
-              <Moon className="size-4 text-slate-700" />
+              <Moon className="size-4 text-foreground" />
             )}
           </Button>
 
@@ -82,23 +90,23 @@ const Header = () => {
             type="button"
             variant="outline"
             size="sm"
-            className="hidden h-9 rounded-xl px-3.5 font-semibold transition-all hover:-translate-y-0.5 hover:border-indigo-500/40 xl:inline-flex cursor-pointer"
+            className="hidden h-9 rounded-xl border-border/80 px-3.5 text-[13px] font-semibold transition-all hover:border-brand-blue/40 hover:bg-muted/70 xl:inline-flex cursor-pointer"
             onClick={() => openInquiryModal("Hire Dedicated Engineers")}
           >
             Hire Developers
           </Button>
 
-          <motion.div whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }}>
+          <MagneticWrap strength={0.18} className="hidden sm:inline-flex">
             <Button
               type="button"
               size="sm"
-              className="group hidden h-9 rounded-xl bg-indigo-600 px-3.5 font-semibold text-white shadow-sm shadow-indigo-600/20 transition-all hover:bg-indigo-700 hover:shadow-md hover:shadow-indigo-600/25 dark:bg-indigo-500 dark:hover:bg-indigo-400 sm:inline-flex sm:px-4 cursor-pointer"
+              className="group relative h-9 overflow-hidden rounded-xl bg-brand-blue px-4 text-[13px] font-semibold text-white shadow-sm shadow-brand-blue/25 transition-all duration-200 hover:bg-brand-blue-hover hover:shadow-md hover:shadow-brand-blue/30 cursor-pointer"
               onClick={() => openInquiryModal("Web & SaaS Product")}
             >
-              <Sparkles className="size-3.5 transition-transform duration-200 group-hover:rotate-12" />
               <span>Start a Project</span>
+              <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
-          </motion.div>
+          </MagneticWrap>
 
           <MobileNavDrawer />
         </div>
@@ -107,7 +115,7 @@ const Header = () => {
       <motion.div
         aria-hidden="true"
         style={{ scaleX }}
-        className="h-[2px] w-full origin-left bg-gradient-to-r from-indigo-600 via-blue-500 to-teal-400"
+        className="h-[2px] w-full origin-left bg-gradient-to-r from-brand-blue via-blue-500 to-brand-violet"
       />
     </header>
   );

@@ -1,73 +1,109 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, MapPin } from "lucide-react";
 
 import { ContactLinks } from "@/components/shared/ContactLinks";
 import { InquiryForm } from "@/components/shared/InquiryForm";
-import { Reveal } from "@/components/shared/MotionPrimitives";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { EASE_CURVE, VIEWPORT_CONFIG } from "@/lib/motion";
+
+const CONTACT_HIGHLIGHTS = [
+  "24-hour response from a senior solution architect",
+  "100% source code and IP ownership from day one",
+  "No-obligation discovery call with transparent pricing",
+] as const;
 
 export function ContactSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="contact" className="scroll-mt-16 py-14 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-card p-5 shadow-xl transition-colors duration-300 hover:border-indigo-500/30 sm:p-8 lg:p-12">
-            <motion.div
+    <section
+      id="contact"
+      className="relative scroll-mt-20 overflow-x-clip bg-background py-16 sm:py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:pl-14 md:pr-8 lg:pl-16 lg:pr-10 min-[1400px]:px-8">
+        <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+          {/* ── Left Closing CTA Anchor (Deep Navy Surface) ── */}
+          <motion.div
+            data-surface="navy"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.48,
+              ease: EASE_CURVE,
+            }}
+            className="relative flex min-w-0 flex-col justify-between overflow-hidden rounded-3xl border border-white/12 p-6 text-white shadow-lg sm:p-8 lg:col-span-5 lg:p-10"
+          >
+            {/* Subtle Architectural Light Depth */}
+            <div
               aria-hidden="true"
-              animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-indigo-500/15 blur-3xl"
+              className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-brand-blue/16 blur-3xl"
             />
-            <motion.div
+            <div
               aria-hidden="true"
-              animate={{ scale: [1.1, 1, 1.1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-              className="pointer-events-none absolute -bottom-24 -left-24 size-72 rounded-full bg-teal-500/15 blur-3xl"
+              className="pointer-events-none absolute -bottom-24 -left-20 size-64 rounded-full bg-brand-violet/12 blur-3xl"
             />
 
-            <div className="relative grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-              <div className="flex min-w-0 flex-col justify-between space-y-6 text-left lg:col-span-5">
-                <div className="space-y-4">
-                  <SectionHeading
-                    badge="Start Your Build"
-                    title="Ready to build your next product with confidence?"
-                    description="Share what you are building. Within 24 business hours, you will receive an architecture overview, recommended team structure, and realistic timeline."
-                  />
+            <div className="relative z-10 space-y-6">
+              <SectionHeading
+                surface="navy"
+                badge="Start Your Build"
+                title="Ready to build your next product with confidence?"
+                description="Share what you are building. Within 24 business hours, you will receive an architecture overview, recommended team structure, and realistic timeline."
+              />
 
-                  <ul className="space-y-2.5 pt-2 text-sm">
-                    {[
-                      "24-hour response from a senior solution architect",
-                      "100% source code and IP ownership from day one",
-                      "No-obligation discovery call with transparent pricing",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-teal-600 dark:text-teal-400" />
-                        <span className="font-medium text-foreground/90">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="space-y-3 rounded-2xl border border-border/70 bg-muted/40 p-4 sm:p-5">
-                  <ContactLinks linkClassName="font-semibold text-foreground" />
-                  <div className="flex items-start gap-2.5 pt-1 text-xs text-muted-foreground">
-                    <MapPin className="mt-0.5 size-4 shrink-0" />
-                    <span>
-                      Engineering and strategy hubs in Surat, Austin, and London
-                      serving US, UK, European, and APAC time zones.
+              <ul className="space-y-3 pt-1 text-sm">
+                {CONTACT_HIGHLIGHTS.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 size-4 shrink-0 text-blue-400"
+                    />
+                    <span className="leading-snug font-medium text-slate-200">
+                      {item}
                     </span>
-                  </div>
-                </div>
-              </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div className="min-w-0 rounded-2xl border border-border/80 bg-background/85 p-4 shadow-sm backdrop-blur-sm transition-colors hover:border-indigo-500/30 sm:p-7 lg:col-span-7">
-                <InquiryForm />
+            <div className="relative z-10 mt-8 space-y-4 border-t border-white/12 pt-6">
+              <ContactLinks linkClassName="font-semibold text-white hover:text-blue-300 [&_svg]:text-blue-400 dark:[&_svg]:text-blue-400" />
+
+              <div className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-300">
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-violet-300"
+                />
+                <span>
+                  Engineering and strategy hubs in Surat, Austin, and London
+                  serving US, UK, European, and APAC time zones.
+                </span>
               </div>
             </div>
-          </div>
-        </Reveal>
+          </motion.div>
+
+          {/* ── Right Inquiry Form Surface ── */}
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.48,
+              delay: prefersReducedMotion ? 0 : 0.08,
+              ease: EASE_CURVE,
+            }}
+            className="min-w-0 rounded-3xl border border-border/80 bg-card p-6 shadow-xs sm:p-8 lg:col-span-7 lg:p-10"
+          >
+            <div className="mb-6 border-b border-border/75 pb-4">
+              <h3 className="text-lg font-bold tracking-tight text-foreground">
+                Share Your Project Brief
+              </h3>
+            </div>
+
+            <InquiryForm />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

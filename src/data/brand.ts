@@ -113,8 +113,6 @@ export const FOOTER_CAPABILITIES = [
 
 export const FOOTER_ENGAGEMENT = [
   { label: "Case Studies", href: "#work" },
-  { label: "Dedicated Squads", href: "#engagement" },
-  { label: "Hire Developers", href: "#engagement" },
   { label: "Delivery Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -123,7 +121,7 @@ export const HERO_METRICS = [
   { value: "1,250+", label: "Projects Delivered" },
   { value: "85+", label: "Engineers & Designers" },
   { value: "94%", label: "Client Retention Rate" },
-  { value: "12+ Years", label: "Industry Experience" },
+  { value: "12+", label: "Years Industry Experience" },
 ];
 
 export const CLIENT_LOGOS = [

@@ -430,10 +430,10 @@ export function ServicesSection() {
           <Button
             variant="outline"
             nativeButton={false}
-            render={<a href="#engagement" />}
+            render={<a href="#contact" />}
             className="group h-10 shrink-0 rounded-xl border-border/85 px-4 text-xs font-semibold transition-all hover:-translate-y-0.5 hover:border-brand-blue/40 hover:bg-surface-subtle sm:text-sm"
           >
-            <span>Compare Engagement Models</span>
+            <span>Discuss Your Project</span>
             <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Button>
         </div>

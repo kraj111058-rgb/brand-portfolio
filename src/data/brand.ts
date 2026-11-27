@@ -98,7 +98,7 @@ export const MOBILE_NAV_LINKS = [
   { label: "Services & Capabilities", href: "#services" },
   { label: "Featured Case Studies", href: "#work" },
   { label: "Tech Stack", href: "#tech-stack" },
-  { label: "Engagement & Process", href: "#engagement" },
+  { label: "Delivery Process", href: "#process" },
   { label: "Testimonials & FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
@@ -180,14 +180,14 @@ export const SOLUTIONS_MENU: NavMenuGroup = {
     {
       title: "Dedicated Product Squads",
       description: "Cross-functional product, design, and engineering teams.",
-      href: "#engagement",
+      href: "#contact",
       icon: "layers",
       tag: "Scale",
     },
     {
       title: "Hire Dedicated Engineers",
       description: "Senior React, Flutter, Node.js, Python, and AI specialists.",
-      href: "#engagement",
+      href: "#contact",
       icon: "users",
     },
     {
@@ -209,6 +209,6 @@ export const SOLUTIONS_MENU: NavMenuGroup = {
     "Integrate vetted full-stack, mobile, or QA specialists directly into your existing workflow.",
   spotlightCtaLabel: "Hire Developers",
   spotlightTopic: "Hire Dedicated Engineers",
-  footerLabel: "Compare hiring models",
-  footerHref: "#engagement",
+  footerLabel: "View delivery process",
+  footerHref: "#process",
 };
